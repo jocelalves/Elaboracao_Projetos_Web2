@@ -1,0 +1,108 @@
+.header{
+    background-color: #0FA8F4; /* cor de fundo*/
+    padding: 10px 20px; /* tamanho da área*/
+    align-items: center ; /* alinhar no centro*/
+    display: flex ;/* redimencionar*/
+    justify-content: space-between; /* colocar os espaços ao lado*/
+
+}
+
+/* Configurando a logo do site */
+.logo{
+   display: flex;
+   align-items: center;
+   color: white;
+   font-size: 18px; /*tamanho da fonte do texto*/
+   font-weight: bold;/*texto em niggan*/
+
+
+}
+
+.logo img{/* dumensões da imagem */
+   width: 90px; /* tamanho */
+   margin-right: 10px; /*margemns*/
+
+}
+
+/*configurar a barra de pesquisa*/
+
+.search-box{
+    flex: 1;
+    max-width: 600px; /*largura maxima */
+    margin: 0 20px;/*margem superios e lateral*/
+    position: relative;
+
+}
+
+.search-box input{
+    width: 100%; /*configuração na parte de dentro*/
+    padding: 10px 40px 10px 15px;/*definindo o espaço cima,direita,baixo,esquerda*/
+    border:none;/*borda*/
+    border-radius: 30px;/*expessura da borda*/
+    font-size: 16px;/*tamanho da font do texto*/
+}
+
+/*configurar icones do menu superior*/
+.icons{
+    display: flex;/*os icones ficam flexiveis a mudança de tela*/
+    gap: 15px;/*Espaço entre os icones*/
+    align-items: center;/*Centralizar os itns no meio do menu*/
+
+}
+
+.icons img{/*Configurando as imagens dos icones*/
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+
+}
+
+/* Configurações para o radapé*/
+
+.footer{
+    background-color: #06ACFF; /*cor de fundo*/
+    padding: 15px 40px 15px 40px;
+    color: white;/* cor do texto*/
+    font-family: Arial, Helvetica, sans-serif;/*Fontes dos texto*/
+}
+
+.footer-esquerdo{
+    font-weight: bold;/*colocando o texto em niggan*/
+    margin: 0;
+
+}
+
+.footer-direito{
+    text-align: right; 
+    /*texto alinhado á (direita)*/
+    margin: 0 0 8px 0;
+}
+
+.icons-sociais{
+    /* configurando a area onde fica os icones das redes sociais*/
+    display: flex;
+    gap: 20px;
+    /*distancia entre eles*/
+    justify-content: flex-end;
+}
+
+.icons-sociais img {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.3s; /*Aniação suave ao passar o mause em cima*/ 
+}
+
+
+
+
+html, body{
+    height: 100%;/*ocupa 100% da auta da tela*/
+    margin: 0;/* remover as margens padrão*/
+    display: flex;
+    flex-direction: column;/*organiza em colunas*/
+}
+
+
+main{
+    flex: 1;/* mandar o rodapé para baixo*/
+}
