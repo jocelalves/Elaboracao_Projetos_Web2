@@ -106,3 +106,94 @@ html, body{
 main{
     flex: 1;/* mandar o rodapé para baixo*/
 }
+
+/* Início do CSS Cadastro ---------------- */
+
+/* Início do CSS Cadastro ---------------- */
+
+/* Fundo com imagem (pode trocar a URL abaixo pela que você quiser) */
+.bg-overlay {
+  background-color: #06ACFF;
+  position: relative;
+}
+
+.bg-overlay::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* Card de cadastro (agora maior) */
+.cadastro-card {
+  position: relative;
+  max-width: 600px; /* aumentei a largura */
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+}
+
+/* Inputs */
+.form-control {
+  border-radius: 10px;
+  font-size: 1rem;
+  padding: 0.75rem;
+}
+
+/* Botão cadastrar */
+.btn-primary {
+  background-color: #6c2bd9;
+  border: none;
+  font-weight: bold;
+}
+
+.btn-primary:hover {
+  background-color: #5a21b8;
+}
+
+/* Labels pretas */
+.text-dark {
+  font-weight: 600;
+  color: #000 !important;
+}
+
+/* Fim do CSS Cadastro ---------------- */
+
+/* Início do CSS 75/25 ---------------- */
+.logo-login {
+  max-width: 120px;
+  height: auto;
+}
+/* Fim do CSS 75/25 ---------------- */
+
+/*configurando da área de login*/
+.login-card{
+  background-color: #168DEE; /*cor de fundo*/
+}
+
+/* Início do CSS Detalhes Serviço ---------------- */
+
+.funcionario-detalhe-img {
+  max-width: 280px;
+  border-radius: 10px;
+}
+
+/* Botão verde claro */
+.btn-pedir {
+  background-color: #32cd32; /* Verde claro */
+  border: none;
+  font-weight: bold;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.btn-pedir:hover {
+  background-color: #28a745; /* Verde mais forte no hover */
+}
+
+/* Caixa de informações */
+.text-start p {
+  margin-bottom: 8px;
+}
+
+/* Fim do CSS Detalhes Serviço ---------------- */
