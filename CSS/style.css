@@ -188,6 +188,7 @@ main{
 #btn-pedir-servico:hover {
   background-color: #1e7e34; /* verde escuro */
 /* Avaliações */
+}
 .list-group-item {
   font-size: 0.95rem;
 }
@@ -225,4 +226,50 @@ body {
 table td, table th {
   vertical-align: middle;
 }
+
 /* Fim do CSS Home do Lojista ---------------- */
+
+
+.pgt:hover
+{
+  background-color: #bcbcbd;
+}
+
+.btn-mudarend{
+  background-color: #0FA8F4;
+}
+.btn-mudarend:hover{
+  background-color: #1b4053;
+  color: white;
+}
+
+.TXT-PGT{
+  color: #06ACFF;
+}
+/* Cartões clicáveis */
+.payment-option, .address-option {
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+.payment-option:hover, .address-option:hover {
+  background-color: #f8f9fa;
+}
+.payment-option.selected, .address-option.selected {
+  border: 2px solid #007bff;
+  background-color: #eef5ff;
+}
+
+/* Navbar */
+.navbar {
+  padding: 12px;
+}
+.nav-link {
+  margin-right: 15px;
+  font-weight: 500;
+}
+.nav-link:hover {
+  text-decoration: underline;
+}
+
