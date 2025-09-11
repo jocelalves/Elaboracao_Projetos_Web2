@@ -273,3 +273,111 @@ table td, table th {
   text-decoration: underline;
 }
 
+
+
+/* Navbar */
+.navbar {
+  padding: 12px;
+}
+.nav-link {
+  margin-right: 15px;
+  font-weight: 500;
+}
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+/* Navbar */
+.navbar {
+  padding: 12px;
+}
+.nav-link {
+  margin-right: 15px;
+  font-weight: 500;
+}
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+/* Cards de serviços */
+.service-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.service-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* Botões "Chamar" */
+.btn-dark {
+  border-radius: 8px;
+  font-weight: bold;
+  padding: 6px 20px;
+}
+.btn-dark:hover {
+  background-color: #333;
+}
+
+/*tela perfil */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+  height: 60px;
+}
+
+.card {
+  border-radius: 12px;
+}
+
+.btn {
+  border-radius: 8px;
+}
+
+#configBtn {
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+}
+
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+  height: 60px;
+}
+
+.card {
+  border-radius: 12px;
+}
+
+.btn {
+  border-radius: 8px;
+}
+
+#configBtn {
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+}
+/*tela d perfil*/
+/* Inicio da Imagem de Perfil ----------------  */
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%; /* deixa circular */
+  border: 3px solid #0d6efd; /* opcional: borda azul bootstrap */
+}
+
+.profile-upload {
+  display: none; /* esconde o input de arquivo */
+}
+/* Fim da Imagem de Perfil ----------------  */
+
+  
