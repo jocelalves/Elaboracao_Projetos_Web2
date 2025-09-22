@@ -370,14 +370,70 @@ body {
 .profile-pic {
   width: 120px;
   height: 120px;
-  object-fit: cover;
-  border-radius: 50%; /* deixa circular */
-  border: 3px solid #0d6efd; /* opcional: borda azul bootstrap */
+  object-fit: cover;      /* ajusta a imagem sem distorcer */
+  border-radius: 50%;     /* deixa circular */
+  border: 3px solid #0d6efd; /* borda azul padrão bootstrap */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efeito hover na foto */
+.profile-pic:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 15px rgba(13, 110, 253, 0.5);
+  cursor: pointer;
 }
 
 .profile-upload {
   display: none; /* esconde o input de arquivo */
 }
+
+/* Inicio da Animação de Troca de Imagem ----------------  */
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #0d6efd;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease-in-out;
+  opacity: 1;
+}
+
+.profile-pic.fade-in {
+  opacity: 0;
+}
+/* Fim da Animação de Troca de Imagem ----------------  */
+
+/* Inicio do Efeito Flash na Foto ----------------  */
+@keyframes flash-effect {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+.profile-pic.flash {
+  animation: flash-effect 0.6s ease-in-out;
+}
+/* Fim do Efeito Flash na Foto ----------------  */
+
+/* Inicio da Animação do Dropdown ----------------  */
+.dropdown-menu {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.25s ease-in-out;
+  display: block;   /* importante para o efeito funcionar */
+  visibility: hidden;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+/* Fim da Animação do Dropdown ----------------  */
+
+
+
+
 /* Fim da Imagem de Perfil ----------------  */
 
   
