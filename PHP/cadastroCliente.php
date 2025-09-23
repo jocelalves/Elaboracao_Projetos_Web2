@@ -1,12 +1,12 @@
 <?php
 // se conectar ao banco de dados
-requeri_once __DIR__ . "/conexao.php";
+require_once __DIR__ . "/conexao.php";
 // funçaõ para captuarar os dados passados de página a outra
 function readdirecWith($url, $params){
 if(!empty($params)){
     // separa os paramentros em espaços diferentes
 $qs= http_build_query($params);
-$sep = (stropos($url,'?') === false ) ?'?':"&";
+$sep = (strpos($url,'?') === false ) ? '?' :"&";
 $url .= $sep."". $qs;
 }
 // joga a url para o cabeçalho no navegador
@@ -31,25 +31,25 @@ try{
   //validando os campos
   //criar uma variavel para receber os erros de validação 
   $erro_validacao=[];
-   if($nome === ""|| $cpf === ""|| $senha === "" $confirmarsenha"" ){
-    $erros_validacao[] = "Preencha todos os campos";
+   if($nome === ""|| $cpf === ""|| $senha === "" || $confirmarsenha==="" ){
+    $erro_validacao[] = "Preencha todos os campos";
    }
    // verificar se a senha e confirma senha são diferentes
    if($senha !== $confirmarsenha){
     $erro_validacao[] = "As senhas não conferem";
    }
    // verificar se a senha tem mais de  8 digitos
-   if(strlen($senha)<12){
+   if(strlen($senha)<8){
     $erro_validacao[] = "Senha deve ter pelo menos 8 caracteres";
    }
     // verificar o cpf pelomenos 11 digitos
-   if(strlen($senha)<11){
+   if(strlen($cpf)<11){
     $erro_validacao[] = "CPF inválido";
    }
    // agora é enviar os erros para a tela cadastro
-   if($erros_validacao){
+   if($erro_validacao){
     readdirecWith("../paginas/telacadastro.html",
-    ["erro"=> urlencode($erros_validacao[0])]);
+    ["erro"=> $erro_validacao[0]]);
    }
 
    // verificarse o cpf já foi cadastrado no banco de dados
@@ -59,9 +59,35 @@ try{
    //se o cpf ja existe ele volta a tela cadastro
    if($stmt->fetch){
     readdirecWith('../paginas/telacadastro.html',["erro"=>
-    urldecode("CPF já esta cadastados")]);
+    ("CPF já esta cadastados")]);
    }
+
+   /* Inserir o cliente no banco de dados */
+   
+   $sql = "INSERT INTO cliente (nome,cpf,telefone,email,senha)
+   values (:nome,:cpf,:telefone,:email,:senha)";
+   // executando o comando no banco de dados 
+   $inserir = $pdo->prepare($sql)->execute([
+    ":nome"=> $nome,
+    ":cpf"=> $cpf,
+    ":telefone"=> $telefone,
+    ":email"=>$email,
+    ":senha"=> $senha,
+   ]); 
+   /* Verificando se foi cadastrado no banco de dados */
+   if($inserir){
+    readdirecWith("../paginas/telacadastro.html",[
+        "cadastro" => "ok"]);
+}else{
+    readdirecWith("../paginas/telacadastro.html",
+    ["erro" => "Erro ao cadastrar no banco de dados"]);
 }
+
+}catch(PDOException $e){
+  readdirecWith("../paginas/telacadastro.html",
+  ["erro"=> "Erro no banco de dados:". $e->getMessage()]);
+}
+
 
 
 

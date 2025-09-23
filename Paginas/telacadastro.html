@@ -21,29 +21,39 @@
       <!-- Fim do Cabeçalho ---------------- -->
 
       <!-- Início do Formulário ---------------- -->
-      <form id="formCadastro" action="caminho do php" method="post">
+      <form id="formCadastro" action="../php/cadastroCliente.php " method="post">
         <!-- Nome -->
         <div class="mb-3">
           <label for="nome" class="form-label text-dark">Nome</label>
-          <input type="text" class="form-control form-control-lg" id="nome" name="nome" placeholder="Digite seu nome"
-            required />
+          <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome" required />
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="email" class="form-label text-dark">Email</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" required />
+        </div>
+
+        <!-- Telefone -->
+        <div class="mb-3">
+          <label for="telefone" class="form-label text-dark">Telefone</label>
+          <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Digite seu telefone" required />
         </div>
 
         <!-- CPF -->
         <div class="mb-3">
           <label for="cpf" class="form-label text-dark">CPF</label>
-          <input type="text" class="form-control form-control-lg" id="cpf" name="cpf" placeholder="000.000.000-00"
-            required />
+          <input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00" required />
         </div>
 
         <!-- Senha -->
         <div class="mb-3">
           <label for="senha" class="form-label text-dark">Senha</label>
           <div class="input-group">
-            <input type="password" class="form-control form-control-lg" id="senha" name="senha" required />
+            <input type="password" class="form-control" id="senha" name="senha" required />
             <button class="btn btn-outline-secondary" type="button" onclick="toggleSenha('senha')">
               👁
-            </button> 
+            </button>
           </div>
         </div>
 
@@ -51,7 +61,7 @@
         <div class="mb-4">
           <label for="confSenha" class="form-label text-dark">Confirmar Senha</label>
           <div class="input-group">
-            <input type="password" class="form-control form-control-lg" id="confSenha" name="confirma-senha" required />
+            <input type="password" class="form-control" id="confSenha" name="confirma-senha" required />
             <button class="btn btn-outline-secondary" type="button" onclick="toggleSenha('confSenha')">
               👁
             </button>
@@ -60,7 +70,7 @@
 
         <!-- Botão -->
         <div class="d-grid">
-          <button type="submit" class="btn btn-primary btn-lg">
+          <button type="submit" class="btn btn-primary">
             Cadastrar
           </button>
         </div>
@@ -80,6 +90,7 @@
     // Máscara para CPF
     $(document).ready(function () {
       $("#cpf").mask("000.000.000-00");
+      $("#telefone").mask("(00) 00000-0000");
     });
 
     // Mostrar/Ocultar senha

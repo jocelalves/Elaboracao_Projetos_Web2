@@ -107,9 +107,33 @@ main{
     flex: 1;/* mandar o rodapé para baixo*/
 }
 
-/* Início do CSS Cadastro ---------------- */
+
 
 /* Início do CSS Cadastro ---------------- */
+
+/* ====== Ajustes da tela de cadastro ====== */
+.cadastro-card {
+  width: 900px;        /* mais largo */
+  max-width: 95%;      /* ocupa quase tudo em telas menores */
+  border-radius: 15px; /* cantos arredondados */
+}
+
+.cadastro-card .form-control {
+  width: 100%;         /* inputs ocupam toda a largura */
+  padding: 14px;       /* mais espaço interno */
+  font-size: 1.1rem;   /* texto maior */
+}
+
+.cadastro-card button {
+  padding: 14px;       /* botão mais alto */
+  font-size: 1.1rem;
+}
+
+
+
+.cadastro-card .form-control {
+  width: 100%; /* garante que os inputs ocupem toda a largura do card */
+}
 
 /* Fundo com imagem (pode trocar a URL abaixo pela que você quiser) */
 .bg-overlay {
