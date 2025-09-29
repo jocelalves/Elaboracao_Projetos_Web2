@@ -24,7 +24,7 @@ try{
         redirecWith("../paginas/frete_pagamento.html",
            ["erro"=> "Metodo inválido"]);
     }
-    // variavel
+    // variavel0
     $nomepagamento = $_POST["nomepagamento"];
 
     // validação
@@ -33,6 +33,24 @@ try{
     if($nomepagamento === ""){
         $erros_validacao[]="Preencha todos os campos";
     }
+
+    /* Inserir o frete no banco de dados */
+    $sql ="INSERT INTO 
+    Formas_pagamento (nome) 
+     Values (:nomepagamento)";
+     // executando o comando no banco de dados
+     $inserir = $pdo->prepare($sql)->execute([
+        ":nomepagamento" => $nomepagamento,     
+     ]);
+
+     /* Verificando se foi cadastrado no banco de dados */
+     if($inserir){
+        redirecWith("../paginas/frete_pagamento.html",
+        ["cadastro" => "ok"]) ;
+     }else{
+        redirecWith("../paginas/frete_pagamento.html"
+        ,["erro" =>"Erro ao cadastrar no banco
+         de dados"]);
 
 
 
