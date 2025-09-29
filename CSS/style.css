@@ -460,4 +460,109 @@ body {
 
 /* Fim da Imagem de Perfil ----------------  */
 
-  
+ /* ===========================
+   Estilos gerais
+=========================== */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+}
+
+/* ===========================
+   Cards
+=========================== */
+.card {
+  border-radius: 0.75rem;
+  box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.05);
+}
+
+/* ===========================
+   Formulários
+=========================== */
+form .form-label {
+  font-weight: 500;
+}
+
+form .form-control {
+  border-radius: 0.5rem;
+}
+
+form .btn {
+  min-width: 100px;
+  margin-right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* Botões por tipo de ação */
+.btn-primary {
+  background-color: #198754;
+  border-color: #198754;
+}
+
+.btn-primary:hover {
+  background-color: #157347;
+  border-color: #157347;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #5c636a;
+  border-color: #5c636a;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #bb2d3b;
+  border-color: #bb2d3b;
+}
+
+/* ===========================
+   Tabelas
+=========================== */
+table.table {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+table.table th {
+  background-color: #e9ecef;
+  font-weight: 600;
+}
+
+table.table td, table.table th {
+  vertical-align: middle;
+  text-align: center;
+}
+
+table.table tbody tr:hover {
+  background-color: #f1f3f5;
+}
+
+/* ===========================
+   Títulos de seção
+=========================== */
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* ===========================
+   Responsividade extra
+=========================== */
+@media (max-width: 576px) {
+  form .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
