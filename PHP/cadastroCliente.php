@@ -1,95 +1,92 @@
 <?php
-// se conectar ao banco de dados
 require_once __DIR__ . "/conexao.php";
-// funçaõ para captuarar os dados passados de página a outra
-function readdirecWith($url, $params){
-if(!empty($params)){
-    // separa os paramentros em espaços diferentes
-$qs= http_build_query($params);
-$sep = (strpos($url,'?') === false ) ? '?' :"&";
-$url .= $sep."". $qs;
+
+function redirecWith($url, $params = []) {
+    if (!empty($params)) {
+        $qs  = http_build_query($params);
+        $sep = (strpos($url, '?') === false) ? '?' : '&';
+        $url .= $sep . $qs;
+    }
+    header("Location: $url");
+    exit;
 }
-// joga a url para o cabeçalho no navegador
-header("location: $url");
-// fecha o script
-exit;
-}
-//capturar os dados jogados em variaveis
-try{
-    // se o metodo de envio for diferente do post
-    if($_SERVER["REQUEST_METHOD"] !== "POST"){
-        // voltar a tela de cadastro e exibir erro
-        hedirecWith("../paginas/telacadastro.html",
-        ["erro"=> "Metodo invalido"]);
-  }
-  // jogando os dados dentro de variaveis
-  $nome = $_POST["nome"];
-  $cpf = $_POST["cpf"];
-  $senha = $_POST["senha"];
-  $confirmarsenha = $_POST["confirma-senha"];
+
+try {
+    if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+        redirecWith("../paginas/telacadastro.html", ["erro" => "Método inválido"]);
+    }
+
+    // Campos vindos do form
+    $nome     = trim($_POST["nome"] ?? "");
+    $email    = trim($_POST["email"] ?? "");
+    $senha    = $_POST["senha"] ?? "";
+    $telefone = $_POST["telefone"] ?? "";
+    $cpf      = $_POST["cpf"] ?? "";
+    $confirma = $_POST["confirma-senha"] ?? ""; // <- nome certo
+
+    // Normaliza números
+    $telefoneNum = preg_replace('/\D/', '', $telefone);
+    $cpfNum      = preg_replace('/\D/', '', $cpf);
+
+    // Validações
+    $erros = [];
+    if ($nome === "" || $email === "" || $senha === "" || $telefone === "" || $cpf === "" || $confirma === "") {
+        $erros[] = "Preencha todos os campos.";
+    }
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $erros[] = "E-mail inválido.";
+    }
+    if ($senha !== $confirma) {
+        $erros[] = "As senhas não conferem.";
+    }
+    if (mb_strlen($senha) < 8) {
+        $erros[] = "Senha deve ter pelo menos 8 caracteres.";
+    }
+    if (strlen($telefoneNum) < 11) {
+        $erros[] = "Telefone incorreto.";
+    }
+    if (strlen($cpfNum) != 11) {
+        $erros[] = "CPF inválido.";
+    }
+
+    if ($erros) {
+        redirecWith("../paginas/telacadastro.html", ["erro" => $erros[0]]);
+    }
+
+    // Verifica CPF duplicado (tabela correta: cliente)
+    $stmt = $pdo->prepare("SELECT 1 FROM cliente WHERE cpf = :cpf LIMIT 1");
+    $stmt->execute([':cpf' => $cpfNum]);
+    if ($stmt->fetch()) {
+        redirecWith("../paginas/telacadastro.html", ["erro" => "CPF já está cadastrado."]);
+    }
+
    
-  //validando os campos
-  //criar uma variavel para receber os erros de validação 
-  $erro_validacao=[];
-   if($nome === ""|| $cpf === ""|| $senha === "" || $confirmarsenha==="" ){
-    $erro_validacao[] = "Preencha todos os campos";
-   }
-   // verificar se a senha e confirma senha são diferentes
-   if($senha !== $confirmarsenha){
-    $erro_validacao[] = "As senhas não conferem";
-   }
-   // verificar se a senha tem mais de  8 digitos
-   if(strlen($senha)<8){
-    $erro_validacao[] = "Senha deve ter pelo menos 8 caracteres";
-   }
-    // verificar o cpf pelomenos 11 digitos
-   if(strlen($cpf)<11){
-    $erro_validacao[] = "CPF inválido";
-   }
-   // agora é enviar os erros para a tela cadastro
-   if($erro_validacao){
-    readdirecWith("../paginas/telacadastro.html",
-    ["erro"=> $erro_validacao[0]]);
-   }
 
-   // verificarse o cpf já foi cadastrado no banco de dados
-   $stmt = $pdo->prepare(" SELECT * FROM cliente where CPF=cpf limit 1");
-   // joga o cpf digitado dentro do banco de dados
-   $stmt ->execute([':cpf =>cpf']);
-   //se o cpf ja existe ele volta a tela cadastro
-   if($stmt->fetch){
-    readdirecWith('../paginas/telacadastro.html',["erro"=>
-    ("CPF já esta cadastados")]);
-   }
+    // INSERT com placeholders nomeados 1:1
+    $sql = "INSERT INTO cliente (nome, cpf, telefone, email, senha)
+            VALUES (:nome, :cpf, :telefone, :email, :senha)";
+    $params = [
+        ':nome'     => $nome,
+        ':cpf'      => $cpfNum,
+        ':telefone' => $telefoneNum,
+        ':email'    => $email,
+        ':senha'    => $senha,
+    ];
 
-   /* Inserir o cliente no banco de dados */
-   
-   $sql = "INSERT INTO cliente (nome,cpf,telefone,email,senha)
-   values (:nome,:cpf,:telefone,:email,:senha)";
-   // executando o comando no banco de dados 
-   $inserir = $pdo->prepare($sql)->execute([
-    ":nome"=> $nome,
-    ":cpf"=> $cpf,
-    ":telefone"=> $telefone,
-    ":email"=>$email,
-    ":senha"=> $senha,
-   ]); 
-   /* Verificando se foi cadastrado no banco de dados */
-   if($inserir){
-    readdirecWith("../paginas/telacadastro.html",[
-        "cadastro" => "ok"]);
-}else{
-    readdirecWith("../paginas/telacadastro.html",
-    ["erro" => "Erro ao cadastrar no banco de dados"]);
+    // (Opcional, só pra sua depuração) — confira contagens:
+    // if (preg_match_all('/:\w+/', $sql, $m) && count($m[0]) !== count($params)) {
+    //     throw new Exception('Placeholders ≠ parâmetros: ' . json_encode($m[0]) . ' vs ' . json_encode(array_keys($params)));
+    // }
+
+    $ok = $pdo->prepare($sql)->execute($params);
+
+    if ($ok) {
+        redirecWith("../paginas/index.html", ["cadastro" => "ok"]);
+    } else {
+        redirecWith("../paginas/telacadastro.html", ["erro" => "Erro ao cadastrar no banco de dados."]);
+    }
+
+} catch (Throwable $e) {
+    // Evite expor detalhes em produção
+    redirecWith("../paginas/telacadastro.html", ["erro" => "Erro no banco de dados."]);
 }
-
-}catch(PDOException $e){
-  readdirecWith("../paginas/telacadastro.html",
-  ["erro"=> "Erro no banco de dados:". $e->getMessage()]);
-}
-
-
-
-
-
-?>

@@ -39,7 +39,7 @@ try{
 
 /* Inserir o frete no banco de dados */
     $sql ="INSERT INTO 
-    Fretes (bairro,valor,transportadora)
+    Frete (bairro,valor,transportadora)
      Values (:bairro,:valor,:transportadora)";
      // executando o comando no banco de dados
      $inserir = $pdo->prepare($sql)->execute([
@@ -50,15 +50,15 @@ try{
 
      /* Verificando se foi cadastrado no banco de dados */
      if($inserir){
-        redirecWith("../paginas/frete_pagamento.html",
+        redirecWith("../paginaslogista/frete_pagamento_logista.html",
         ["cadastro" => "ok"]) ;
      }else{
-        redirecWith("../paginas/frete_pagamento.html"
+        redirecWith("../paginaslogista/frete_pagamento_logista.html"
         ,["erro" =>"Erro ao cadastrar no banco
          de dados"]);
      }
 }catch(\Exception $e){
-redirecWith("../paginas/frete_pagamento.html",
+redirecWith("../paginaslogista/frete_pagamento_logista.html",
       ["erro" => "Erro no banco de dados: "
       .$e->getMessage()]);
 }

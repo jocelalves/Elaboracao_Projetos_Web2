@@ -6,16 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tela de Cadastro</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="CSS/style.css" />
+  <link rel="stylesheet" href="../CSS/cadastrocliente.css" />
 </head>
 
 <body>
   <!-- Início do Container Cadastro ---------------- -->
-  <div class="bg-overlay d-flex justify-content-center align-items-center vh-100">
+  <div class="bg-overlay">
     <div class="card cadastro-card p-5 shadow-lg">
       <!-- Início do Cabeçalho ---------------- -->
       <div class="mb-4 d-flex align-items-center">
-        <a href="login.html" class="btn btn-sm btn-outline-dark me-2">← Voltar</a>
+        <a href="../index.html" class="btn btn-sm btn-outline-dark me-2">← Voltar</a>
+
+
         <h3 class="mb-0">Arruma Já - Cadastro</h3>
       </div>
       <!-- Fim do Cabeçalho ---------------- -->
@@ -88,10 +90,7 @@
 
   <script>
     // Máscara para CPF
-    $(document).ready(function () {
-      $("#cpf").mask("000.000.000-00");
-      $("#telefone").mask("(00) 00000-0000");
-    });
+   
 
     // Mostrar/Ocultar senha
     function toggleSenha(id) {
